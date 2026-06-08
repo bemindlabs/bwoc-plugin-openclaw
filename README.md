@@ -8,7 +8,7 @@
   <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg">
   <img alt="Status" src="https://img.shields.io/badge/status-WIP-orange">
   <img alt="Host" src="https://img.shields.io/badge/host-OpenClaw-111827">
-  <img alt="Part of BWOC" src="https://img.shields.io/badge/part%20of-BWOC%20%E5%85%AB%E4%BB%99-6f42c1">
+  <img alt="Part of BWOC" src="https://img.shields.io/badge/part%20of-BWOC-6f42c1">
   <img alt="Runtime" src="https://img.shields.io/badge/runtime-Node.js-339933">
 </p>
 
@@ -21,7 +21,7 @@
 Unlike the declarative adapters, OpenClaw plugins run an **in-process runtime module** (`src/index.js`). Each registered tool shells out to `bwoc`; OpenClaw also natively maps Claude/Codex-style bundles, so BWOC skills re-export cleanly.
 
 > [!NOTE]
-> **Status: WIP.** Manifest + entry are in place; tool/hook registrations are landing incrementally. See the [roadmap](#️-roadmap).
+> **Status: WIP.** Coordination tools and the `bwoc` exec helper are implemented and unit-tested. The exact OpenClaw tool-registration call is TODO-guarded pending host confirmation — see the [roadmap](#️-roadmap).
 
 ## 🧩 What it exposes
 
@@ -100,23 +100,23 @@ npm run build
 ## 🗺️ Roadmap
 
 - [x] Scaffold: `openclaw.plugin.json`, `package.json`, entry module
-- [ ] Coordination tools (`bwoc_list/status/send/run/chat/task/team`)
-- [ ] Agent harness registration (`bwoc run <agent>`)
+- [x] Coordination tools (`bwoc_list/status/send/run/chat/task/team`) + exec helper
+- [x] Agent harness delegation (`bwoc run <agent>`)
 - [ ] Memory slot provider (`bwoc memory`)
 - [ ] Skill bundle (Claude/Codex-compatible)
-- [ ] `openclaw plugins inspect --runtime` smoke test
+- [ ] Confirm host tool-registration API + `openclaw plugins inspect --runtime` smoke test
 
-## 🌊 The Eight Immortals host-adapter set
+## 🔗 BWOC host-adapter set
 
-One of five BWOC → host adapters — **八仙過海・各顯神通** (the Eight Immortals cross the sea, each by their own power):
+One of five BWOC → host adapters, one per agent host:
 
-| Host | Repo | Steward |
-|---|---|---|
-| Claude Code | [bwoc-plugin-claude](https://github.com/bemindlabs/bwoc-plugin-claude) | 呂洞賓 Lü Dongbin |
-| OpenAI Codex | [bwoc-plugin-codex](https://github.com/bemindlabs/bwoc-plugin-codex) | 曹國舅 Cao Guojiu |
-| Antigravity | [bwoc-plugin-agy](https://github.com/bemindlabs/bwoc-plugin-agy) | 張果老 Zhang Guolao |
-| **OpenClaw** | [bwoc-plugin-openclaw](https://github.com/bemindlabs/bwoc-plugin-openclaw) | 鐵拐李 Li Tieguai |
-| Hermes | [bwoc-plugin-hermes](https://github.com/bemindlabs/bwoc-plugin-hermes) | 漢鍾離 Han Zhongli |
+| Host | Repo |
+|---|---|
+| Claude Code | [bwoc-plugin-claude](https://github.com/bemindlabs/bwoc-plugin-claude) |
+| OpenAI Codex | [bwoc-plugin-codex](https://github.com/bemindlabs/bwoc-plugin-codex) |
+| Antigravity | [bwoc-plugin-agy](https://github.com/bemindlabs/bwoc-plugin-agy) |
+| **OpenClaw** | [bwoc-plugin-openclaw](https://github.com/bemindlabs/bwoc-plugin-openclaw) |
+| Hermes | [bwoc-plugin-hermes](https://github.com/bemindlabs/bwoc-plugin-hermes) |
 
 ## 🙏 Maintainer
 
