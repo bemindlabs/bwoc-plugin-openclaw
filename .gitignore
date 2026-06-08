@@ -1,0 +1,6 @@
+# BWOC agent worktrees (debase worktreeBase points here)
+/worktrees/
+.DS_Store
+.bwoc/
+node_modules/
+dist/

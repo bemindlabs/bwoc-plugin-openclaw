@@ -1,0 +1,14 @@
+{
+  "name": "@bemindlabs/bwoc-plugin-openclaw",
+  "version": "0.0.1",
+  "description": "BWOC fleet adapter for OpenClaw.",
+  "license": "MIT",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "echo \"(lint TODO)\"",
+    "format": "echo \"(format TODO)\"",
+    "test": "echo \"(test TODO)\"",
+    "build": "echo \"(build TODO)\""
+  }
+}

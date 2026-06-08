@@ -1,0 +1,10 @@
+{
+  "id": "bwoc",
+  "version": "0.0.1",
+  "description": "BWOC fleet adapter for OpenClaw — registers coordination tools, agents, skills, and a memory slot that wrap the bwoc CLI.",
+  "openclaw": {
+    "compat": { "pluginApi": "^1" },
+    "install": { "minHostVersion": "0.0.0" }
+  },
+  "main": "./src/index.js"
+}
