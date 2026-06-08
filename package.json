@@ -6,9 +6,9 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "lint": "echo \"(lint TODO)\"",
-    "format": "echo \"(format TODO)\"",
-    "test": "echo \"(test TODO)\"",
-    "build": "echo \"(build TODO)\""
+    "lint": "node --check src/index.js && node --check src/bwoc.js && node --check src/tools.js",
+    "format": "echo \"(no formatter configured — ESM, hand-formatted)\"",
+    "test": "node --test",
+    "build": "echo \"(ESM — nothing to build)\""
   }
 }
