@@ -28,7 +28,7 @@ Unlike the declarative adapters, OpenClaw plugins run an **in-process runtime mo
 | Surface | BWOC capability | Wraps |
 |---|---|---|
 | **Tools** | Coordinate the fleet | `bwoc list` · `status` · `send` · `run` · `chat` · `task` · `team` |
-| **Agent harness** | Delegate to fleet members | `agents/agent-*` via `bwoc run` |
+| **Agent harness** | Delegate to any agent | `bwoc run <agent>` |
 | **Skills** | Reuse BWOC skills | Claude/Codex-compatible bundle |
 | **Memory slot** | Shared deep-memory | `plugins.slots.memory` → `bwoc memory` |
 
@@ -69,9 +69,9 @@ openclaw plugins install ./bwoc-plugin-openclaw   # or --link ./bwoc-plugin-open
 ```text
 # tools registered by the plugin (call from any OpenClaw agent)
 bwoc_list                 # list registered agents
-bwoc_status agent-luban   # health + identity snapshot
-bwoc_send agent-luban ... # append a message to an agent's inbox
-bwoc_run  agent-luban ... # run a single task headless
+bwoc_status <agent>   # health + identity snapshot
+bwoc_send <agent> ... # append a message to an agent's inbox
+bwoc_run  <agent> ... # run a single task headless
 
 # verify active registrations
 openclaw plugins inspect bwoc --runtime --json
@@ -118,9 +118,9 @@ One of five BWOC → host adapters — **八仙過海・各顯神通** (the Eigh
 | **OpenClaw** | [bwoc-plugin-openclaw](https://github.com/bemindlabs/bwoc-plugin-openclaw) | 鐵拐李 Li Tieguai |
 | Hermes | [bwoc-plugin-hermes](https://github.com/bemindlabs/bwoc-plugin-hermes) | 漢鍾離 Han Zhongli |
 
-## 🙏 Steward
+## 🙏 Maintainer
 
-Maintained by **`agent-litieguai`** (鐵拐李 Li Tieguai) — the rough, open-natured immortal whose iron crutch and gourd hold more than they appear. Fitting for the *open* host.
+Maintained by **Bemind Technology**, part of the BWOC host-adapter set. This connector is **generic**: it ships no agents, teams, or workspace identities of its own — it discovers your fleet from the local `bwoc` workspace at runtime.
 
 ## 🤝 Contributing
 

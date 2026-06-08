@@ -40,7 +40,7 @@ export const tools = [
     parameters: {
       type: 'object',
       properties: {
-        agent: { type: 'string', description: 'Agent id or bare name, e.g. agent-luban or luban' },
+        agent: { type: 'string', description: 'Agent id or bare name (e.g. "agent-name" or "name")' },
         all: { type: 'boolean', description: 'Full detail block for every agent' },
       },
       additionalProperties: false,
