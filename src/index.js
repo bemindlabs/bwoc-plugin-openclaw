@@ -9,6 +9,10 @@
 //   - api.registerHook(name, fn)    coarse internal hooks
 //   - capability slots: tools, agent harnesses, skills, a memory slot
 //
+// Skill bundle: `scripts/sync-skills.mjs` re-exports BWOC framework skills as
+// `skills/fw-<name>/SKILL.md` (Claude/Codex-compatible; gitignored). OpenClaw
+// maps that `skills/` tree natively — no registration code is needed here.
+//
 // The EXACT tool-registration call name is not pinned by the docs we have, so
 // below we attempt the most likely surfaces in order and fall back to a
 // lifecycle hook, leaving a TODO where the host contract is unconfirmed. The

@@ -4,3 +4,5 @@
 .bwoc/
 node_modules/
 dist/
+# Generated skill bundles (scripts/sync-skills.mjs) — re-exports, never committed
+/skills/fw-*/
