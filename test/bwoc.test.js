@@ -48,8 +48,10 @@ test('tool descriptors are well-formed and complete', () => {
 test('register(api) wires tools through a mock host API', () => {
   const calls = [];
   const events = {};
+  const memories = [];
   const mockApi = {
     registerTool: (tool) => calls.push(tool.name),
+    registerMemory: (provider) => memories.push(provider),
     on: (ev, fn) => {
       events[ev] = fn;
     },
@@ -57,6 +59,8 @@ test('register(api) wires tools through a mock host API', () => {
   };
   const result = plugin.register(mockApi);
   assert.equal(calls.length, tools.length, 'all tools should register');
+  assert.equal(memories.length, 1, 'the memory provider should register');
+  assert.equal(memories[0].slot, 'memory');
   assert.ok('ready' in events, 'a lifecycle hook should be subscribed');
   assert.equal(result.id, 'bwoc');
 });

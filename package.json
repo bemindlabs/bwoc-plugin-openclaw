@@ -6,7 +6,7 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "lint": "node --check src/index.js && node --check src/bwoc.js && node --check src/tools.js",
+    "lint": "node --check src/index.js && node --check src/bwoc.js && node --check src/tools.js && node --check src/memory.js",
     "format": "echo \"(no formatter configured — ESM, hand-formatted)\"",
     "test": "node --test",
     "sync-skills": "node scripts/sync-skills.mjs",

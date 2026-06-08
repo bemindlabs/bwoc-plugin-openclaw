@@ -104,7 +104,7 @@ npm run build
 - [x] Scaffold: `openclaw.plugin.json`, `package.json`, entry module
 - [x] Coordination tools (`bwoc_list/status/send/run/chat/task/team`) + exec helper
 - [x] Agent harness delegation (`bwoc run <agent>`)
-- [ ] Memory slot provider (`bwoc memory`)
+- [x] Memory slot provider (`bwoc memory`) — `src/memory.js`
 - [x] Skill bundle (Claude/Codex-compatible) — `scripts/sync-skills`
 - [ ] Confirm host tool-registration API + `openclaw plugins inspect --runtime` smoke test
 

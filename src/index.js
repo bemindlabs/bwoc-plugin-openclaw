@@ -20,6 +20,7 @@
 
 import { tools, toolsByName } from './tools.js';
 import { bwocList } from './bwoc.js';
+import { bwocMemoryProvider } from './memory.js';
 
 const PLUGIN_ID = 'bwoc';
 
@@ -48,7 +49,23 @@ export function register(api) {
     log(`[${PLUGIN_ID}] registered ${registered}/${tools.length} coordination tools.`);
   }
 
-  // --- 2. Lifecycle hook: log fleet availability on startup --------------
+  // --- 2. Register the memory-slot provider ------------------------------
+  // TODO(openclaw-api): confirm the canonical memory-slot registration call
+  // against https://docs.openclaw.ai/tools/plugin . The docs confirm a single
+  // `memory` capability slot (`plugins.slots.memory`) but do not pin the method
+  // name. We try the most likely shapes; whichever the host provides wins. The
+  // provider itself (src/memory.js) bridges `bwoc memory` and is fully testable
+  // regardless of whether the host hook is present.
+  if (tryRegisterMemory(api, bwocMemoryProvider)) {
+    log(`[${PLUGIN_ID}] registered memory-slot provider (bridges \`bwoc memory\`).`);
+  } else {
+    log(
+      `[${PLUGIN_ID}] no memory-slot registration API found on \`api\`; memory provider ` +
+        'is defined but not wired. See TODO in src/index.js (https://docs.openclaw.ai/tools/plugin).'
+    );
+  }
+
+  // --- 3. Lifecycle hook: log fleet availability on startup --------------
   // Documented hook surface: api.on(<lifecycle event>, handler).
   const onReady = async () => {
     const res = await bwocList({ json: true });
@@ -124,6 +141,54 @@ function tryRegisterTool(api, tool) {
   return false;
 }
 
+/**
+ * Attempt to register the memory-slot provider through whichever host API is
+ * present. Returns true on the first surface that accepts it. Never throws.
+ *
+ * TODO(openclaw-api): replace these probes with the single canonical call once
+ * the memory-slot contract is pinned (https://docs.openclaw.ai/tools/plugin).
+ */
+function tryRegisterMemory(api, provider) {
+  if (!api) return false;
+  try {
+    // Candidate A: dedicated memory registrar(s).
+    if (typeof api.registerMemory === 'function') {
+      api.registerMemory(provider);
+      return true;
+    }
+    if (typeof api.registerMemoryProvider === 'function') {
+      api.registerMemoryProvider(provider);
+      return true;
+    }
+    // Candidate B: a `memory` namespace with .register / .use / .set.
+    if (api.memory && typeof api.memory.register === 'function') {
+      api.memory.register(provider);
+      return true;
+    }
+    if (api.memory && typeof api.memory.use === 'function') {
+      api.memory.use(provider);
+      return true;
+    }
+    // Candidate C: a `slots` namespace exposing the single memory slot.
+    if (api.slots && typeof api.slots.memory === 'function') {
+      api.slots.memory(provider);
+      return true;
+    }
+    if (api.slots && api.slots.memory && typeof api.slots.memory.register === 'function') {
+      api.slots.memory.register(provider);
+      return true;
+    }
+    // Candidate D: generic slot setter, e.g. api.registerSlot('memory', provider).
+    if (typeof api.registerSlot === 'function') {
+      api.registerSlot('memory', provider);
+      return true;
+    }
+  } catch {
+    /* unknown host contract — fall through to "not wired" */
+  }
+  return false;
+}
+
 /** Best-effort logger that degrades to console. */
 function pickLogger(api) {
   if (api && typeof api.log === 'function') return (...a) => api.log(...a);
@@ -145,5 +210,5 @@ function countAgents(stdout) {
   return null;
 }
 
-export { tools, toolsByName };
+export { tools, toolsByName, bwocMemoryProvider };
 export default { register };
