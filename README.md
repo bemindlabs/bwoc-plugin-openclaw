@@ -110,7 +110,7 @@ npm run build
 
 ## 🔗 BWOC host-adapter set
 
-One of five BWOC → host adapters, one per agent host:
+One of seven BWOC → host adapters, one per agent host:
 
 | Host | Repo |
 |---|---|
@@ -119,6 +119,8 @@ One of five BWOC → host adapters, one per agent host:
 | Antigravity | [bwoc-plugin-agy](https://github.com/bemindlabs/bwoc-plugin-agy) |
 | **OpenClaw** | [bwoc-plugin-openclaw](https://github.com/bemindlabs/bwoc-plugin-openclaw) |
 | Hermes | [bwoc-plugin-hermes](https://github.com/bemindlabs/bwoc-plugin-hermes) |
+| Cursor | [bwoc-plugin-cursor](https://github.com/bemindlabs/bwoc-plugin-cursor) |
+| Vercel | [bwoc-plugin-vercel](https://github.com/bemindlabs/bwoc-plugin-vercel) |
 
 ## 🙏 Maintainer
 
