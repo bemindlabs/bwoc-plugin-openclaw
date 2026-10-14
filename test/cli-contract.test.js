@@ -22,11 +22,9 @@ let m;
 if (REAL) {
   const dir = mkdtempSync(join(tmpdir(), 'bwoc-contract-'));
   const stub = join(dir, 'bwoc');
-  const err = join(dir, 'stderr');
-  writeFileSync(
-    stub,
-    `#!/bin/sh\n"${REAL}" "$@" --help >/dev/null 2>"${err}" || { cat "${err}" >&2; exit 2; }\n`,
-  );
+  // exec: the real stderr and exit code pass straight through — no shared
+  // temp file for concurrent invocations to trample.
+  writeFileSync(stub, `#!/bin/sh\nexec "${REAL}" "$@" --help >/dev/null\n`);
   chmodSync(stub, 0o755);
   process.env.BWOC_BIN = stub;
   process.env.BWOC_WORKSPACE = dir;
@@ -66,6 +64,6 @@ for (const [name, call] of Object.entries(calls)) {
 }
 
 test('a rejected argv fails (negative control)', { skip: !REAL && 'set BWOC_CONTRACT_BIN to run' }, async () => {
-  const res = await b.bwocExec(['fleet', '--json']);
+  const res = await b.bwocExec(['no-such-subcommand-x', '--json']);
   assert.equal(res.ok, false);
 });
